@@ -7,6 +7,7 @@ import {getFirstAuthor} from "@/utils";
 import {toast} from "react-toastify";
 import {Book} from "@/interfaces/book.ts";
 import {SubmitHandler, useForm} from "react-hook-form";
+import {useEffect} from "react";
 
 type Inputs = {
     content: string
@@ -21,6 +22,7 @@ function AddNoteModal({isOpen, onClose}: ModalPropsNew) {
 
     const {
         register,
+        setValue,
         handleSubmit,
         formState: {errors},
     } = useForm<Inputs>()
@@ -42,6 +44,10 @@ function AddNoteModal({isOpen, onClose}: ModalPropsNew) {
             progress: undefined,
         });
     }
+
+    useEffect(() => {
+        setValue('content', '')
+    }, [selectedBook, setValue])
 
     const body = (
         <div>
